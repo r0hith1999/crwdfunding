@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Kaspa Community Funding - Proposals</title>
+  </head>
+  <body>
+    <header>
+      <h1>Kaspa Community Funding</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/proposals">Proposals</a></li>
+          <li><a href="/submit-proposal">Submit Proposal</a></li>
+          {% if user_type == 'admin' %}
+          <li><a href="{{ url_for('submitted_proposals') }}">Submitted Proposals</a></li>
+          {% endif %}
+          {% if user %}
+          <li><a href="#">{{ user }}</a></li>
+          {% else %}
+          <li><a href="/login">Login</a></li>
+          {% endif %}
+          <li><a href="/register">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Proposals</h2>
+        {% if proposals %}
+          <ul>
+            {% for proposal in proposals %}
+              <li>
+                <h3>{{ proposal[1] }}</h3>
+                <p>{{ proposal[2] }}</p>
+                <p>Requested Amount: {{ proposal[3] }}</p>
+                <p>Address: {{ proposal[9] }}</p>
+                <p>Proposal Created by: {{ proposal[4] }}</p>
+                <p>Proposal Approved by: {{ proposal[8] }}</p>
+                <label for="file">progress of Proposal</label>
+                <progress id="file" value="{{ proposal[11] }}" max="100"> {{ proposal[11] }}% </progress>     
+                <p>Till now recieved {{ proposal[10] }} out of {{ proposal[3] }} </p>        
+                <form action="/proposals" method="POST">
+                  <input type="hidden" name="proposal_id" value="{{ proposal[0] }}">
+                  <button type="submit" name="vote_type" value="upvote">Upvote ({{ proposal[5] }})</button>
+                  <button type="submit" name="vote_type" value="downvote">Downvote ({{ proposal[6] }})</button>
+                </form>
+              </li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>There are currently no proposals.</p>
+        {% endif %}
+        {% if message %}
+        <script>
+            alert("{{ message }}");
+        </script>
+        {% endif %}
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2023 Kaspa Community Funding</p>
+    </footer>
+    
+    
+  </body>
+</html>

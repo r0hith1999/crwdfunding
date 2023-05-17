@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Manage Users - Admin Panel</title>
+  </head>
+  <body>
+    <header>
+      <h1>Manage Users - Admin Panel</h1>
+    </header>
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>User Type</th>
+            <th>Change User Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <td>{{ user[0] }}</td>
+            <td>{{ user[1] }}</td>
+            <td>
+              <form method="post" action="/manage_users">
+                <input type="hidden" name="username" value="{{ user[0] }}">
+                <select name="user_type">
+                  <option value="regular">Regular User</option>
+                  <option value="admin">Admin User</option>
+                </select>
+                <button type="submit">Update User Type</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Verification Success</title>
+</head>
+<body>
+  <h1>Verification Successful</h1>
+  <form action="/submit" method="post">
+    <input type="hidden" name="email" value="{{ email }}">
+    <label for="verification_code">Verification Code:</label>
+    <input type="text" id="verification_code" name="verification_code" required><br><br>
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>

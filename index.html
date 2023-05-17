@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Kaspa Community Funding</title>
+  </head>
+  <body>
+    <header>
+      <h1>Kaspa Community Funding</h1>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/proposals">Proposals</a></li>
+          <li><a href="/submit-proposal">Submit Proposal</a></li>
+          {% if user_type == 'admin' %}
+          <li><a href="{{ url_for('submitted_proposals') }}">Submitted Proposals</a></li>
+          <li><a href="{{ url_for('manage_users') }}">Manage Users</a></li>
+          {% endif %}
+          {% if user %}
+          <li><a href="#">{{ user }}</a></li>
+          {% else %}
+          <li><a href="/login">Login</a></li>
+          {% endif %}
+          <li><a href="/register">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Welcome to Kaspa Community Funding</h2>
+        <p>This website allows you to submit proposals for projects that support or enhance the Kaspa ecosystem, and then allows other community members to vote on whether or not to fund those proposals. The funding for these proposals comes from the Kaspa community treasury, which is supported by a portion of the Kaspa mining rewards. {{ user_type }}</p>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2023 Kaspa Community Funding</p>
+    </footer>
+  </body>
+</html>

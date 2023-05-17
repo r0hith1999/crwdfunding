@@ -1,0 +1,32 @@
+{% block content %}
+    <h1>Submitted Proposals</h1>
+    <table>
+        <tr>
+            <th>Proposal Title</th>
+            <th>Description</th>
+            <th>Requested Amount</th>
+            <th>created By</th>
+            <th>Approval Status</th>
+            <th>Approved/Declined By</th>
+        </tr>
+        {% for proposal in proposals %}
+            <tr>
+                <td>{{ proposal[1] }}</td>
+                <td>{{ proposal[2] }}</td>
+                <td>{{ proposal[3] }}</td>
+                <td>{{ proposal[4] }}</td>
+                <td>{{ proposal[7] }}</td>
+                <td>{{ proposal[8] }}</td>
+                {% if proposal[7] == 'Pending' %}
+                    <td>
+                        <form action="{{ url_for('submitted_proposals') }}" method="post">
+                            <button type="submit" name="action" value="approve">Approve</button>
+                            <button type="submit" name="action" value="decline">Decline</button>
+                            <input type="hidden" name="proposal_id" value="{{ proposal[0] }}">
+                        </form>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
